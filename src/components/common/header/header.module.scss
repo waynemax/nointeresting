@@ -1,0 +1,55 @@
+@import "../../../assets/styles/variables";
+@import "../../../assets/styles/mixins";
+
+.header {
+  &Component {
+    &_container {
+      height: $headerHeight;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      &_center {
+        @include center($widthOfMainContainer);
+        display: flex;
+      }
+      &_logotype {
+        width: 48px;
+        height: 32px;
+        margin: auto auto auto 0;
+        flex: 2;
+        svg {
+          width: 100%;
+        }
+      }
+      &_navigation {
+        flex: 2;
+        margin: auto;
+        display: flex;
+        &_item {
+          margin: auto;
+        }
+      }
+      &_actions {
+        flex: 2;
+        margin-right: 0;
+        text-align: right;
+      }
+    }
+    &_filled {
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.15);
+    }
+    &_pseudo {
+      width: 100%;
+      height: $headerHeight;
+    }
+    &_dark {
+      color: white !important;
+    }
+    &_light {
+      color: black;
+    }
+  }
+}

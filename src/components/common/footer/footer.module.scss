@@ -1,0 +1,56 @@
+@import "../../../assets/styles/mixins";
+@import "../../../assets/styles/variables";
+
+.footer {
+  &Component {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    padding-top: 40px;
+    &_actionsPart {
+      width: 100%;
+      display: flex;
+      padding-bottom: 40px;
+      &_center {
+        @include center($widthOfMainContainer);
+        display: flex;
+        &_title {
+          font-weight: 700;
+          padding-bottom: 40px;
+        }
+        &_contact {
+          flex: 1;
+          margin-left: 0;
+          padding-right: 40px;
+          max-width: 240px;
+        }
+        &_navigation {
+          flex: 1;
+          margin-right: 0;
+        }
+      }
+    }
+    &_informationPart {
+      display: flex;
+      &_center {
+        @include center($widthOfMainContainer);
+        margin-top: auto;
+        margin-bottom: auto;
+        display: flex;
+        border-top: 1px solid rgba(0,0,0,0.1);
+        padding-top: 15px;
+        padding-bottom: 15px;
+        &_name {
+          flex: 1;
+          max-width: 240px;
+          padding-right: 40px;
+          margin: auto auto auto 0;
+        }
+        &_address {
+          margin: auto 0 auto auto;
+          flex: 1;
+        }
+      }
+    }
+  }
+}

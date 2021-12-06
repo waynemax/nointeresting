@@ -1,0 +1,1 @@
+/*eslint-disable*/module.exports={messages:{"English":"English","Plural Test: How many developers?":"Plural Test: How many developers?","Russian":"Russian","Serbian":"Serbian","Spanish":"Spanish","{0}":[["0"]]}};
