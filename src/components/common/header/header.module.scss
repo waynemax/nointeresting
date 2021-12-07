@@ -10,40 +10,119 @@
       left: 0;
       right: 0;
       display: flex;
+      animation: all 300ms ease;
+      z-index: 101;
+      &_hamburger {
+        flex: 1;
+        [role="button"] {
+          margin: auto 0;
+        }
+      }
       &_center {
-        @include center($widthOfMainContainer);
+        @include center();
+        @include noSelect;
         display: flex;
       }
       &_logotype {
-        width: 48px;
-        height: 32px;
+        height: $headerHeight;
         margin: auto auto auto 0;
-        flex: 2;
-        svg {
-          width: 100%;
+        display: flex;
+        cursor: pointer;
+        @include noSelect;
+        @include screen(isNotDesktop) {
+          margin: auto 0 auto auto;
+          flex: 1;
+        }
+        &_icon {
+          width: 50px;
+          height: 45px;
+          margin: auto 0;
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+          @include screen(isNotDesktop) {
+            margin: auto;
+          }
+        }
+        &_textIcon {
+          width: 118px;
+          height: 58px;
+          margin: auto 0 auto 8px;
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
         }
       }
       &_navigation {
-        flex: 2;
         margin: auto;
         display: flex;
+        @include screen(isNotDesktop) {
+          flex: 1;
+        }
         &_item {
           margin: auto;
+          cursor: pointer;
+          padding: 4px 8px;
+          @include screen(isNotDesktop) {
+            margin: auto 0 auto auto;
+          }
+          &:hover {
+            opacity: 0.8;
+          }
         }
       }
       &_actions {
-        flex: 2;
-        margin-right: 0;
         text-align: right;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        margin: auto 0 auto auto;
+        @include noSelect;
+        @include screen(isNotDesktop) {
+          flex: 1;
+          justify-content: end;
+        }
+        &_icon {
+          width: 24px;
+          height: 24px;
+          margin: auto 8px;
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+        span {
+          line-height: 24px;
+          font-weight: 600;
+          margin-right: 10px;
+        }
       }
     }
     &_filled {
-      backdrop-filter: blur(15px);
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.15);
+      backdrop-filter: blur(5px);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      background-color: rgba(0,0,0,.1);
     }
     &_pseudo {
       width: 100%;
       height: $headerHeight;
+    }
+    &_mobileNavigation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: $backgroundMobileNavigation;
+      z-index: 100;
+      &_list {
+        height: calc(100vh - #{$headerHeight});
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        [data-id="item"] {
+          margin: 24px auto;
+        }
+      }
     }
     &_dark {
       color: white !important;

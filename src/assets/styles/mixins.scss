@@ -1,12 +1,9 @@
+@import "variables";
+
 @mixin mediaQuery ($width, $type: max) {
   @media (#{$type}-width: #{$width}) {
     @content;
   }
-}
-
-@mixin center ($width) {
-  width: $width;
-  margin: 0 auto;
 }
 
 @mixin mediaHeight ($height, $type: max) {
@@ -21,10 +18,31 @@
   }
 }
 
-@mixin full {
+@mixin isDesktop {
   @include screen(desktop) {
     @content;
   }
+}
+
+@mixin isTablet {
+  @include screen(tablet) {
+    @content;
+  }
+}
+
+@mixin adaptiveContainerWidth {
+  width: $defaultWidthOfMainContainer;
+  @include isTablet {
+    width: $tabletWidthOfMainContainer;
+  }
+  @include isMobile {
+    width: $mobileWidthOfMainContainer;
+  }
+}
+
+@mixin center () {
+  @include adaptiveContainerWidth();
+  margin: 0 auto;
 }
 
 @mixin noSelect {
@@ -41,16 +59,16 @@
   $desktop: "(min-width: 1280px)";
   $tablet: "(min-width: 769px) and (max-width: 1023px)";
   $mobile: "(max-width: 768px)";
-  $notFull: "(max-width: 1023px)";
-  $notMobile: "(min-width: 769px)";
+  $isNotDesktop: "(max-width: 1023px)";
+  $isNotMobile: "(min-width: 769px)";
 
   @if $size == desktop {
     @media only screen and #{$desktop} {
       @content;
     }
   }
-  @else if $size == notMobile {
-    @media only screen and #{$notMobile} {
+  @else if $size == isNotMobile {
+    @media only screen and #{$isNotMobile} {
       @content;
     }
   }
@@ -64,8 +82,8 @@
       @content;
     }
   }
-  @else if $size == notFull {
-    @media only screen and #{$notFull} {
+  @else if $size == isNotDesktop {
+    @media only screen and #{$isNotDesktop} {
       @content;
     }
   }

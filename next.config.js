@@ -1,6 +1,8 @@
 const path = require("path");
+const withImages = require("next-images");
+const withSvgr = require("next-svgr");
 
-module.exports = {
+module.exports = withImages({
   i18n: {
     locales: ["ru", "en", "sr", "es"],
     defaultLocale: "ru",
@@ -14,4 +16,4 @@ module.exports = {
   images: {
     disableStaticImages: true,
   },
-};
+});

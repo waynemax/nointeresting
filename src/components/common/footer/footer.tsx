@@ -1,7 +1,9 @@
 import styles from "./footer.module.scss";
 import { memo } from "react";
+import { useFooterLogic } from "./footer.logic";
 
 const FooterComponent = () => {
+  const { navigationRender } = useFooterLogic();
   return (
     <footer className={styles.footerComponent}>
       <div className={styles.footerComponent_actionsPart}>
@@ -10,12 +12,21 @@ const FooterComponent = () => {
             <div className={styles.footerComponent_actionsPart_center_title}>
               <span>Связаться с нами</span>
             </div>
+            <div className={styles.footerComponent_actionsPart_center_list_item}>
+              <a href="mailto:info@megapolis.com">Info@megapolis.com</a>
+            </div>
+            <div className={styles.footerComponent_actionsPart_center_list_item}>
+              <a href="tel:+74997072321">Тех. поддержка: +7 (499) 707-23-21</a>
+            </div>
+            <div className={styles.footerComponent_actionsPart_center_list_item}>
+              <a href="tel:+74959027501">Офис: +7 (495) 902-75-01</a>
+            </div>
           </div>
           <div className={styles.footerComponent_actionsPart_center_navigation}>
             <div className={styles.footerComponent_actionsPart_center_title}>
-              <span>Связаться с нами</span>
+              <span>Комплексные решения</span>
             </div>
-            <div>123</div>
+            <div>{navigationRender()}</div>
           </div>
         </div>
       </div>

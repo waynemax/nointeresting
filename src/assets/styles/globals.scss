@@ -56,3 +56,16 @@ a {
   -ms-user-select: none;
   user-select: none;
 }
+
+.hiddenForMobile {
+  @include screen(isNotDesktop) {
+    display: none !important;
+  }
+}
+
+.showForMobile {
+  display: none;
+  @include screen(isNotDesktop) {
+    display: flex !important;
+  }
+}
