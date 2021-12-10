@@ -1,5 +1,9 @@
 import { t } from "@lingui/macro";
 
+export type FooterProps = {
+  isLight?: boolean;
+};
+
 export const useNavigationList = () => {
   return [
     {

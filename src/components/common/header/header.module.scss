@@ -10,8 +10,10 @@
       left: 0;
       right: 0;
       display: flex;
-      animation: all 300ms ease;
+      color: white;
+      transition: all 300ms ease;
       z-index: 101;
+      border-bottom: 1px solid transparent;
       &_hamburger {
         flex: 1;
         [role="button"] {
@@ -37,20 +39,21 @@
           width: 50px;
           height: 45px;
           margin: auto 0;
-          background-size: contain;
-          background-repeat: no-repeat;
-          background-position: center;
+          display: flex;
           @include screen(isNotDesktop) {
+            margin: auto;
+          }
+          svg {
             margin: auto;
           }
         }
         &_textIcon {
-          width: 118px;
+          width: 180px;
           height: 58px;
-          margin: auto 0 auto 8px;
-          background-size: contain;
-          background-repeat: no-repeat;
-          background-position: center;
+          display: flex;
+          svg {
+            margin: auto 0 auto 8px;
+          }
         }
       }
       &_navigation {
@@ -62,7 +65,7 @@
         &_item {
           margin: auto;
           cursor: pointer;
-          padding: 4px 8px;
+          padding: 4px 16px;
           @include screen(isNotDesktop) {
             margin: auto 0 auto auto;
           }
@@ -73,7 +76,6 @@
       }
       &_actions {
         text-align: right;
-        color: white;
         cursor: pointer;
         display: flex;
         margin: auto 0 auto auto;
@@ -86,9 +88,10 @@
           width: 24px;
           height: 24px;
           margin: auto 8px;
-          background-size: contain;
-          background-repeat: no-repeat;
-          background-position: center;
+          display: flex;
+          svg {
+            margin: auto;
+          }
         }
         span {
           line-height: 24px;
@@ -100,7 +103,10 @@
     &_filled {
       backdrop-filter: blur(5px);
       border-bottom: 1px solid rgba(255,255,255,0.15);
-      background-color: rgba(0,0,0,.1);
+      color: white;
+    }
+    &_afterCover {
+      color: #2F4455;
     }
     &_pseudo {
       width: 100%;
@@ -114,6 +120,7 @@
       bottom: 0;
       background-color: $backgroundMobileNavigation;
       z-index: 100;
+      color: white;
       &_list {
         height: calc(100vh - #{$headerHeight});
         display: flex;
@@ -125,10 +132,14 @@
       }
     }
     &_dark {
-      color: white !important;
+      .headerComponent_container {
+        color: #2F4455 !important;
+      }
     }
     &_light {
-      color: black;
+      .headerComponent_container {
+        color: white !important;
+      }
     }
   }
 }

@@ -1,5 +1,11 @@
 import { t } from "@lingui/macro";
 
+export type HeaderProps = {
+  isDark?: boolean;
+  isLight?: boolean;
+  withoutScrollSideEffects?: boolean;
+};
+
 export const useNavigationList = () => {
   return [
     {

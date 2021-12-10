@@ -13,6 +13,9 @@ $secondFooterColor: #A9A9A9;
     padding-top: 40px;
     font-size: 14px;
     color: $primaryFooterColor;
+    &_light {
+      color: white !important;
+    }
     &_actionsPart {
       width: 100%;
       display: flex;

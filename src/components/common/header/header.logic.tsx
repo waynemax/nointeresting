@@ -1,14 +1,20 @@
 import styles from "./header.module.scss";
-import { useNavigationList } from "./header.utils";
+import { HeaderProps, useNavigationList } from "./header.utils";
 import { useEffect, useMemo, useState } from "react";
 
-export const useHeaderLogic = () => {
+export const useHeaderLogic = (props: HeaderProps) => {
+  const { withoutScrollSideEffects = false } = props;
   const navigationList = useNavigationList();
   const [isOpenedMobileNavigation, setIsOpenedMobileNavigation] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollBelowTheCover, setScrollBelowTheCover] = useState(false);
 
   const handleScroll = (): void => {
-    setIsScrolled(window.pageYOffset > 0);
+    const { pageYOffset } = window;
+    setIsScrolled(pageYOffset > 0);
+    if (!withoutScrollSideEffects) {
+      setScrollBelowTheCover(pageYOffset > 420 - 64 / 2); // height of cover component - header height / 2
+    }
   };
 
   useEffect(() => {
@@ -16,7 +22,7 @@ export const useHeaderLogic = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  });
+  }, []);
 
   const navigationRender = useMemo(() => {
     return navigationList.map((navigationItem, key) => {
@@ -32,5 +38,5 @@ export const useHeaderLogic = () => {
     });
   }, [navigationList]);
 
-  return { navigationRender, isScrolled, isOpenedMobileNavigation, setIsOpenedMobileNavigation };
+  return { navigationRender, isScrolled, isOpenedMobileNavigation, setIsOpenedMobileNavigation, scrollBelowTheCover };
 };

@@ -1,9 +1,11 @@
-import { Footer, Header } from "src/components";
+import { Cover, Footer, Header } from "src/components";
 
-export const PageWrapper: React.FC = (props) => {
+export const PageWrapperWithCover: React.FC = (props) => {
   return (
     <div className="Page">
-      <Header withoutScrollSideEffects={true} isDark={true} />
+      <Cover>
+        <Header />
+      </Cover>
       <div className="Page-inner display_flex">
         <div className="page-wrapper-container">
           <div>{props.children}</div>

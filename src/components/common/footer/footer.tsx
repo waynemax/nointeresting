@@ -1,11 +1,16 @@
 import styles from "./footer.module.scss";
-import { memo } from "react";
+import { FC, memo } from "react";
 import { useFooterLogic } from "./footer.logic";
+import classNames from "classnames";
+import { FooterProps } from "./footer.utils";
 
-const FooterComponent = () => {
+const FooterComponent: FC<FooterProps> = ({ isLight = false }) => {
   const { navigationRender } = useFooterLogic();
   return (
-    <footer className={styles.footerComponent}>
+    <footer
+      className={classNames([styles.footerComponent], {
+        [styles.footerComponent_light]: isLight,
+      })}>
       <div className={styles.footerComponent_actionsPart}>
         <div className={styles.footerComponent_actionsPart_center}>
           <div className={styles.footerComponent_actionsPart_center_contact}>

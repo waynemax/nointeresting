@@ -1,0 +1,105 @@
+@import "../../assets/styles/mixins";
+@import "../../assets/styles/variables";
+
+.career {
+  &_wrapper {
+    width: 100%;
+    display: flex;
+    padding: 120px 0 40px;
+  }
+  &_center {
+    @include center();
+    display: flex;
+  }
+  &_logo {
+    margin: 0 auto;
+    width: 356px;
+    height: 188px;
+    @include isMobile {
+      width: 160px;
+      height: 85px;
+    }
+    svg {
+      width: 100%;
+    }
+  }
+  &_about {
+    display: flex;
+    margin: auto;
+    padding-top: 24px;
+    span {
+      margin: auto;
+      color: white;
+      font-size: 24px;
+      text-align: center;
+      line-height: 36px;
+      font-weight: 800;
+      max-width: 918px;
+      background: -webkit-linear-gradient(#fff, #999);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+  &_vacancies {
+    &_header {
+      width: 100%;
+      margin-top: 50px;
+      display: flex;
+      margin-bottom: 50px;
+      span {
+        font-size: 50px;
+        color: white;
+        line-height: 63px;
+        font-weight: 700;
+        margin-left: 0;
+        margin-right: auto;
+        @include screen(isNotDesktop) {
+          margin: auto;
+          font-size: 30px;
+          line-height: 39px;
+        }
+        @include screen(tablet) {
+          margin: auto;
+          font-size: 36px;
+          line-height: 47px;
+        }
+      }
+    }
+    &_items {
+      width: 100%;
+      padding-bottom: 40px;
+    }
+    &_item {
+      @include noSelect;
+      cursor: pointer;
+      background-color: rgba(248, 249, 252, 0.1);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      font-weight: 600;
+      font-size: 18px;
+      margin-bottom: 8px;
+      line-height: 30px;
+      max-width: 752px;
+      margin-left: auto;
+      margin-right: auto;
+      &:hover {
+        opacity: 0.8;
+      }
+      &_title {
+        margin-left: 0;
+        margin-right: auto;
+        span {
+          color: #0A84FF;
+        }
+      }
+      &_date {
+        margin-right: 0;
+        margin-left: auto;
+        span {
+          color: rgba(255, 255, 255, 0.6);
+        }
+      }
+    }
+  }
+}

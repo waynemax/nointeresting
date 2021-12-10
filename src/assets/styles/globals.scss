@@ -30,6 +30,10 @@ a {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  &_dark {
+    background-color: #04021A;
+    color: white;
+  }
 
   &-inner {
     flex: 1 1;
