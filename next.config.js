@@ -1,6 +1,9 @@
 const path = require("path");
 
-module.exports = {
+const withReactSvg = require("next-react-svg");
+
+module.exports = withReactSvg({
+  include: path.resolve(__dirname, "src/assets/images"),
   i18n: {
     locales: ["ru", "en", "sr", "es"],
     defaultLocale: "ru",
@@ -14,4 +17,4 @@ module.exports = {
   images: {
     disableStaticImages: true,
   },
-};
+});

@@ -30,6 +30,10 @@ a {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  &_dark {
+    background-color: #04021A;
+    color: white;
+  }
 
   &-inner {
     flex: 1 1;
@@ -55,4 +59,17 @@ a {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.hiddenForMobile {
+  @include screen(isNotDesktop) {
+    display: none !important;
+  }
+}
+
+.showForMobile {
+  display: none;
+  @include screen(isNotDesktop) {
+    display: flex !important;
+  }
 }

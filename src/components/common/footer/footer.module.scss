@@ -1,19 +1,31 @@
 @import "../../../assets/styles/mixins";
 @import "../../../assets/styles/variables";
 
+$maxWidthOfFirsPart: 300px;
+$primaryFooterColor: #04021A;
+$secondFooterColor: #A9A9A9;
+
 .footer {
   &Component {
     display: flex;
     flex-direction: column;
     background-color: transparent;
     padding-top: 40px;
+    font-size: 14px;
+    color: $primaryFooterColor;
+    &_light {
+      color: white !important;
+    }
     &_actionsPart {
       width: 100%;
       display: flex;
-      padding-bottom: 40px;
+      padding-bottom: 20px;
       &_center {
-        @include center($widthOfMainContainer);
+        @include center();
         display: flex;
+        @include screen(isNotDesktop) {
+          flex-direction: column;
+        }
         &_title {
           font-weight: 700;
           padding-bottom: 40px;
@@ -21,29 +33,43 @@
         &_contact {
           flex: 1;
           margin-left: 0;
-          padding-right: 40px;
-          max-width: 240px;
+          padding-right: 20px;
+          max-width: $maxWidthOfFirsPart;
         }
         &_navigation {
           flex: 1;
+          @include noSelect;
           margin-right: 0;
+          &_item {
+            cursor: pointer;
+            line-height: 40px;
+            &:hover {
+              opacity: 0.5;
+            }
+          }
+        }
+        &_list {
+          &_item {
+            line-height: 40px;
+          }
         }
       }
     }
     &_informationPart {
       display: flex;
       &_center {
-        @include center($widthOfMainContainer);
+        @include center();
         margin-top: auto;
         margin-bottom: auto;
         display: flex;
         border-top: 1px solid rgba(0,0,0,0.1);
         padding-top: 15px;
         padding-bottom: 15px;
+        color: $secondFooterColor;
         &_name {
           flex: 1;
-          max-width: 240px;
-          padding-right: 40px;
+          max-width: $maxWidthOfFirsPart;
+          padding-right: 20px;
           margin: auto auto auto 0;
         }
         &_address {

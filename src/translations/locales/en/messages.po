@@ -13,11 +13,11 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/common/header/header.logic.tsx:15
+#: src/components/common/header/header.utils.ts:16
 msgid "About"
 msgstr "About"
 
-#: src/components/common/header/header.logic.tsx:16
+#: src/components/common/header/header.utils.ts:20
 msgid "Career"
 msgstr "Career"
 
@@ -25,7 +25,7 @@ msgstr "Career"
 msgid "English"
 msgstr "English"
 
-#: src/components/common/header/header.logic.tsx:14
+#: src/components/common/header/header.utils.ts:12
 msgid "Products"
 msgstr "Products"
 
@@ -41,6 +41,6 @@ msgstr "Serbian"
 msgid "Spanish"
 msgstr "Spanish"
 
-#: src/components/common/header/header.logic.tsx:17
+#: src/components/common/header/header.utils.ts:24
 msgid "Support"
 msgstr "Support"

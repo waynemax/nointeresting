@@ -1,1 +1,1 @@
-/*eslint-disable*/module.exports={messages:{"English":"English","Plural Test: How many developers?":"Plural Test: Сколько разработчиков?","Russian":"Russian","Serbian":"С-erbian","Spanish":"Испанский","{0}":[["0"]]}};
+/*eslint-disable*/module.exports={messages:{"About":"О нас","Career":"Карьера","English":"English","Products":"Продукты","Russian":"Русский","Serbian":"С-erbian","Spanish":"Испанский","Support":"Поддержка"}};

@@ -1,3 +1,6 @@
 $bodyBackground: #f8f8f8;
 $headerHeight: 64px;
-$widthOfMainContainer: 1100px;
+$defaultWidthOfMainContainer: 1100px;
+$tabletWidthOfMainContainer: 834px;
+$mobileWidthOfMainContainer: calc(100% - 32px);
+$backgroundMobileNavigation: #04021A;
