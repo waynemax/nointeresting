@@ -15,11 +15,10 @@ export const usePaginationLogic = (props: PaginationProps) => {
   const handleScroll = useCallback(() => {
     const [bottomPoint, scrollHeight] = [window.scrollY + window.innerHeight, document.body.scrollHeight];
     const needPercent = (scrollHeight / 100) * scrollThreshold;
-
     if (bottomPoint > needPercent) {
-      onEndReached({ hasNext, isLoading });
+      onEndReached();
     }
-  }, [hasNext, isLoading]);
+  }, [onEndReached, scrollThreshold]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);

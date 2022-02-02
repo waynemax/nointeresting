@@ -44,10 +44,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const Index: NextPage = () => {
   const { data, error, mutate, size, setSize, isValidating }: any = useSWRInfinite(
-    (index: number, prev) => {
-        console.log(index, prev);
-        return `https://reqres.in/api/users?per_page=${PAGE_SIZE}&page=${index + 1}`
-    },
+    (index: number) => `https://reqres.in/api/users?per_page=${PAGE_SIZE}&page=${index + 1}`,
     fetcher,
   { revalidateFirstPage: false }
   );
@@ -83,9 +80,9 @@ const Index: NextPage = () => {
         hasNext={hasNext}
         isLoading={isRefreshing || isLoadingMore}
         classNameWrapper="PaginationWrapper"
-        onEndReached={({ isLoading, hasNext }) => {
-          console.log(111222, { isLoading, hasNext });
-          if (!isLoading && hasNext) {
+        onEndReached={() => {
+          console.log(111222, { isRefreshing, isLoadingMore, hasNext });
+          if (!isRefreshing && !isLoadingMore && hasNext) {
             setSize(size + 1);
           }
         }}

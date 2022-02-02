@@ -4,7 +4,7 @@ export type PaginationProps = {
   data: any[];
   hasNext: boolean;
   renderItem: (item: any) => ReactNode;
-  onEndReached: (args: { isLoading: boolean, hasNext: boolean }) => void;
+  onEndReached: () => void;
   isEmpty: boolean;
   isLoading: boolean;
   classNameWrapper?: string;
