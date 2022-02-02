@@ -12,20 +12,21 @@ export const usePaginationLogic = (props: PaginationProps) => {
     }, 3000);
   }, []);
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     const [bottomPoint, scrollHeight] = [window.scrollY + window.innerHeight, document.body.scrollHeight];
     const needPercent = (scrollHeight / 100) * scrollThreshold;
+
     if (bottomPoint > needPercent) {
       onEndReached({ hasNext, isLoading });
     }
-  };
+  }, [hasNext, isLoading]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [handleScroll]);
 
   return {
     data,

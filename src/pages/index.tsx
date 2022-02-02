@@ -44,8 +44,12 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const Index: NextPage = () => {
   const { data, error, mutate, size, setSize, isValidating }: any = useSWRInfinite(
-    (index: number) => [`https://reqres.in/api/users?per_page=${PAGE_SIZE}&page=${index + 1}`],
+    (index: number, prev) => {
+        console.log(index, prev);
+        return `https://reqres.in/api/users?per_page=${PAGE_SIZE}&page=${index + 1}`
+    },
     fetcher,
+  { revalidateFirstPage: false }
   );
 
   let issues = [];
@@ -58,7 +62,7 @@ const Index: NextPage = () => {
   const isRefreshing = isValidating && data && data.length === size;
   const hasNext = data ? size < data[0]?.total_pages : false;
 
-  console.log(111222, !isRefreshing, !isLoadingMore, hasNext);
+  // console.log(111222, !isRefreshing, !isLoadingMore, hasNext);
 
   return (
     <div>
