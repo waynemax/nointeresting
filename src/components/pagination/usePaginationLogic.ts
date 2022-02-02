@@ -16,7 +16,7 @@ export const usePaginationLogic = (props: PaginationProps) => {
     const [bottomPoint, scrollHeight] = [window.scrollY + window.innerHeight, document.body.scrollHeight];
     const needPercent = (scrollHeight / 100) * scrollThreshold;
     if (bottomPoint > needPercent) {
-      onEndReached();
+      onEndReached({ hasNext, isLoading });
     }
   };
 

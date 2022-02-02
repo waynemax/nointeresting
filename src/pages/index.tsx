@@ -58,7 +58,7 @@ const Index: NextPage = () => {
   const isRefreshing = isValidating && data && data.length === size;
   const hasNext = data ? size < data[0]?.total_pages : false;
 
-  console.log(111222, hasNext);
+  console.log(111222, !isRefreshing, !isLoadingMore, hasNext);
 
   return (
     <div>
@@ -79,9 +79,9 @@ const Index: NextPage = () => {
         hasNext={hasNext}
         isLoading={isRefreshing || isLoadingMore}
         classNameWrapper="PaginationWrapper"
-        onEndReached={() => {
-          console.log(111222, { isRefreshing: !isRefreshing, isLoadingMore: !isLoadingMore, hasNext });
-          if (!isRefreshing && !isLoadingMore && hasNext) {
+        onEndReached={({ isLoading, hasNext }) => {
+          console.log(111222, { isLoading, hasNext });
+          if (!isLoading && hasNext) {
             setSize(size + 1);
           }
         }}
