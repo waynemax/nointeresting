@@ -1,0 +1,18 @@
+.listItem {
+  &_wrapper {
+    display: flex;
+    height: 90px;
+    box-sizing: border-box;
+    border: 1px solid rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+    padding: 12px;
+    border-radius: 12px;
+    & div {
+      border-right: 1px solid rgba(0,0,0,0.1);
+      margin-right: 10px;
+      padding-right: 10px;
+      font-size: 14px;
+      color: dimgray;
+    }
+  }
+}

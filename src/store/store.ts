@@ -1,10 +1,9 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 
-import counterReducer from "../examples-dont-touch/isolate-example-module/counterSlice";
 
 export function makeStore() {
   return configureStore({
-    reducer: { counter: counterReducer },
+    reducer: {},
   });
 }
 
