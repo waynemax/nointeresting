@@ -1,13 +1,18 @@
 import { ReactNode } from "react";
+import { SWRInfiniteKeyLoader } from "swr/infinite";
 
 export type PaginationProps = {
   data: any[];
-  hasNext: boolean;
   renderItem: (item: any) => ReactNode;
   onEndReached: () => void;
   isEmpty: boolean;
-  isLoading: boolean;
   classNameWrapper?: string;
   scrollThreshold?: number;
   isEmptyPlaceholder?: ReactNode;
+};
+
+export type UseInfiniteLogicProps = {
+  customFetcher: any;
+  URLHandler: SWRInfiniteKeyLoader;
+  pageSize: number;
 };

@@ -2,8 +2,8 @@ import { PaginationProps } from "./definitions";
 import { usePaginationLogic } from "./usePaginationLogic";
 
 const PaginationComponent = (props: PaginationProps) => {
-  const { data, renderItem, isEmpty } = usePaginationLogic(props);
-  const { isEmptyPlaceholder = <div>Здесь пусто...</div> } = props;
+  const { data, renderItem } = usePaginationLogic(props);
+  const { isEmpty, isEmptyPlaceholder = <div>Здесь пусто...</div> } = props;
   return (
     <div className={props.classNameWrapper}>
       {(data ?? []).map((item, key) => (

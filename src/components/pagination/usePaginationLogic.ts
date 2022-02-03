@@ -1,16 +1,8 @@
 import { PaginationProps } from "./definitions";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 
 export const usePaginationLogic = (props: PaginationProps) => {
-  const [isLocked, setIsLocked] = useState(false);
-  const { data, renderItem, isEmpty, isLoading, onEndReached, hasNext = false, scrollThreshold = 80 } = props;
-
-  const setLocked = useCallback(() => {
-    setIsLocked(true);
-    setTimeout(() => {
-      setIsLocked(false);
-    }, 3000);
-  }, []);
+  const { data, renderItem, onEndReached, scrollThreshold = 80 } = props;
 
   const handleScroll = useCallback(() => {
     const [bottomPoint, scrollHeight] = [window.scrollY + window.innerHeight, document.body.scrollHeight];
@@ -29,8 +21,6 @@ export const usePaginationLogic = (props: PaginationProps) => {
 
   return {
     data,
-    hasNext,
-    isEmpty,
     renderItem,
     onEndReached,
     scrollThreshold,

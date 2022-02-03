@@ -1,8 +1,8 @@
 import { GetStaticProps, NextPage } from "next";
 import { loadTranslation } from "../shared/utils";
 import { ListItem } from "../components/list-item";
-import useSWRInfinite from "swr/infinite";
 import { Pagination } from "../components/pagination";
+import { useInfiniteLogic } from "../components/pagination/useInfiniteLogic";
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const translation = await loadTranslation(ctx.locale!, process.env.NODE_ENV === "production");
@@ -12,17 +12,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     },
   };
 };
-
-// const { onEndReached, data, loading, error } = useDataLoad({
-//   url: (d: any) => "string",
-//   initialOptions: () => ({headers: {}, params: {}}),
-//   onMoreOptions: ({ headers, params }) =>  ({params: {...params, more: params.page + 1}, headers }),
-//   onMore: (prevData, data) => {
-//   merge данных
-//
-//     return {финальная дата}
-//   },
-// });
 
 /* custom fetcher with access
 
@@ -38,38 +27,29 @@ const { data, error, mutate, size, setSize, isValidating }: any = useSWRInfinite
 );
 */
 
-const PAGE_SIZE = 3;
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
+const pageSize = 3;
 
 const Index: NextPage = () => {
-  const { data, error, mutate, size, setSize, isValidating }: any = useSWRInfinite(
-    (index: number) => `https://reqres.in/api/users?per_page=${PAGE_SIZE}&page=${index + 1}`,
-    fetcher,
-  { revalidateFirstPage: false }
-  );
-
-  let issues = [];
-  data && data.forEach((item) => ("data" in item ? (issues = [...issues, ...item.data]) : null));
-
-  const isLoadingInitialData = !data && !error;
-  const isLoadingMore = isLoadingInitialData || (size > 0 && data && typeof data[size - 1] === "undefined");
-  const isEmpty = data?.[0]?.data.length === 0;
-  const isReachingEnd = isEmpty || (data && data[data.length - 1]?.data.length < PAGE_SIZE);
-  const isRefreshing = isValidating && data && data.length === size;
-  const hasNext = data ? size < data[0]?.total_pages : false;
-
-  // console.log(111222, !isRefreshing, !isLoadingMore, hasNext);
+  const { size, isLoadingMore, issues, isRefreshing, mutate, setSize, isEmpty, hasNext, isReachingEnd } =
+    useInfiniteLogic({
+      URLHandler: (index, previousPageData) => {
+        return `https://reqres.in/api/users?per_page=${pageSize}&page=${index + 1}`;
+      },
+      customFetcher: undefined,
+      pageSize,
+    });
 
   return (
     <div>
       <div style={{ height: 50 }} />
       <div style={{ height: 40, position: "fixed", backgroundColor: "paleturquoise", top: 0 }}>
-        страница {size}; элементов {isLoadingMore ? "..." : issues.length}
+        <div>
+          страница {size}; элементов {isLoadingMore ? "..." : issues.length}
+        </div>
         <button disabled={isRefreshing} onClick={() => mutate()}>
           {isRefreshing ? "Обновление..." : "Обновить"}
         </button>
-        <button disabled={!size} onClick={() => setSize(0)}>
+        <button disabled={!size} onClick={() => setSize(1)}>
           Почистить
         </button>
       </div>
@@ -77,24 +57,17 @@ const Index: NextPage = () => {
       <Pagination
         data={issues}
         isEmpty={isEmpty}
-        hasNext={hasNext}
-        isLoading={isRefreshing || isLoadingMore}
         classNameWrapper="PaginationWrapper"
-        onEndReached={() => {
-          console.log(111222, { isRefreshing, isLoadingMore, hasNext });
-          if (!isRefreshing && !isLoadingMore && hasNext) {
-            setSize(size + 1);
-          }
-        }}
         isEmptyPlaceholder={<div>Здесь пусто :(</div>}
-        renderItem={(item) => {
-          return <ListItem id={item.id} email={item.email} />;
+        renderItem={(item) => <ListItem id={item.id} email={item.email} />}
+        onEndReached={() => {
+          if (!isRefreshing && !isLoadingMore && hasNext) setSize(size + 1);
         }}
       />
 
       <div>
-        <button disabled={isLoadingMore || isReachingEnd} onClick={() => setSize(size + 1)}>
-          {isLoadingMore ? "Загрузка..." : isReachingEnd ? "Элементов больше нет" : "Далее"}
+        <button disabled={isLoadingMore || isReachingEnd || !hasNext} onClick={() => setSize(size + 1)}>
+          {isLoadingMore ? "Загрузка..." : isReachingEnd || !hasNext ? "Элементов больше нет" : "Далее"}
         </button>
       </div>
     </div>
